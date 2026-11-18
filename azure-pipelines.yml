@@ -19,3 +19,30 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+
+- task: CopyFiles@2
+  displayName: 'Prepare application files'
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: |
+      src/**
+      public/**
+      package.json
+      package-lock.json
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/app'
+
+- task: ArchiveFiles@2
+  displayName: 'Create ZIP archive'
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/app'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
+    replaceExistingArchive: true
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish application artifact'
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)/app.zip'
+    artifactName: 'nodejs-app'
+    publishLocation: 'pipeline'
