@@ -67,11 +67,11 @@ stages:
             artifact: nodejs-app
 
           - task: AzureWebApp@1
-            displayName: 'Deploy to bewikii-lab'
+            displayName: 'Deploy to bewickii-lab'
             inputs:
               azureSubscription: 'sc-bewikii-lab'
               appType: 'webAppLinux'
-              appName: 'bewikii-lab'
+              appName: 'bewickii-lab'
               package: '$(Pipeline.Workspace)/nodejs-app/app.zip'
               startUpCommand: 'npm start'
 
