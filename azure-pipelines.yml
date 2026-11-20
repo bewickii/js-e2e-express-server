@@ -33,6 +33,7 @@ stages:
           public/**
           package.json
           package-lock.json
+          .eslintrc
         TargetFolder: '$(Build.ArtifactStagingDirectory)/app'
 
     - task: ArchiveFiles@2
